@@ -767,12 +767,103 @@ textarea {
 @media (max-width: 720px) {
   .sidebar,
   .main-view {
-    padding: 18px;
+    padding: 12px;
+  }
+
+  .sidebar {
+    gap: 12px;
+  }
+
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand h1 {
+    font-size: 18px;
+  }
+
+  .brand p,
+  .stat-panel,
+  .tag-box .section-title {
+    display: none;
+  }
+
+  .type-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .tab {
+    grid-template-columns: 1fr;
+    gap: 2px;
+    min-height: 54px;
+    padding: 6px 4px;
+    text-align: center;
+  }
+
+  .tab > span:first-child {
+    display: none;
+  }
+
+  .tab strong {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .tag-box {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .tag-list {
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    padding: 1px 0 5px;
+    scrollbar-width: thin;
+  }
+
+  .tag-button {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+
+  .side-actions {
+    margin-top: 0;
+  }
+
+  .ghost-button {
+    min-height: 38px;
+  }
+
+  .main-view {
+    gap: 14px;
+  }
+
+  .toolbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 7px;
+  }
+
+  .search-wrap {
+    min-height: 44px;
+    padding: 0 11px;
+    box-shadow: none;
+  }
+
+  .primary-icon-button {
+    min-height: 44px;
+    padding: 0 12px;
   }
 
   .field-grid,
-  .case-fields,
-  .toolbar {
+  .case-fields {
     grid-template-columns: 1fr;
   }
 
@@ -786,5 +877,98 @@ textarea {
   .ritual-panel-head {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .entry-list {
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .entry-section {
+    gap: 7px;
+  }
+
+  .entry-card {
+    gap: 7px;
+    padding: 11px 12px;
+  }
+
+  .entry-card h2 {
+    font-size: 15px;
+  }
+
+  .entry-card p {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.55;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .badge-row {
+    gap: 5px;
+  }
+
+  .badge {
+    min-height: 23px;
+    padding: 2px 7px;
+    font-size: 11px;
+  }
+
+  .editor-pane {
+    scroll-margin-top: 10px;
+  }
+
+  .editor-form,
+  .lookup-panel {
+    gap: 14px;
+    padding: 14px;
+    box-shadow: none;
+  }
+
+  .lookup-head {
+    gap: 6px;
+  }
+
+  .lookup-head h2 {
+    font-size: 19px;
+    line-height: 1.4;
+  }
+
+  .lookup-head p {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .lookup-body,
+  .ritual-list {
+    gap: 7px;
+  }
+
+  .lookup-paragraph {
+    padding: 9px 10px;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .ritual-group summary {
+    padding: 9px 10px;
+  }
+
+  .ritual-group summary::after {
+    width: 21px;
+    height: 21px;
+  }
+
+  .ritual-notes {
+    gap: 6px;
+    padding: 0 9px 9px;
+  }
+
+  .ritual-note {
+    padding: 8px 9px;
+    font-size: 13px;
+    line-height: 1.6;
   }
 }
