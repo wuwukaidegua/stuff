@@ -16,6 +16,209 @@
           <p>咨询案例 · 教学笔记 · 占星草药仪式</p>
         </div>
       </div>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>包的塔罗档案室</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">B</div>
+        <div>
+          <h1>包的塔罗档案室</h1>
+          <p>咨询案例 · 教学笔记 · 占星草药仪式</p>
+        </div>
+      </div>
+
+      <nav class="type-tabs" aria-label="内容类型">
+        <button class="tab is-active" data-filter="all" type="button">
+          <span aria-hidden="true">✦</span>
+          <span>全部记录</span>
+          <strong id="count-all">0</strong>
+        </button>
+        <button class="tab" data-filter="case" type="button">
+          <span aria-hidden="true">◈</span>
+          <span>咨询案例</span>
+          <strong id="count-case">0</strong>
+        </button>
+        <button class="tab" data-filter="note" type="button">
+          <span aria-hidden="true">☾</span>
+          <span>学习笔记</span>
+          <strong id="count-note">0</strong>
+        </button>
+      </nav>
+
+      <div class="stat-panel">
+        <div>
+          <span>本月新增</span>
+          <strong id="count-month">0</strong>
+        </div>
+        <div>
+          <span>资料条目</span>
+          <strong id="count-materials">0</strong>
+        </div>
+      </div>
+
+      <div class="tag-box">
+        <div class="section-title">标签</div>
+        <div id="tag-list" class="tag-list"></div>
+      </div>
+
+      <div class="side-actions">
+        <button id="export-btn" class="ghost-button" type="button" title="导出备份">
+          <span aria-hidden="true">⇩</span>
+          <span>导出</span>
+        </button>
+        <label class="ghost-button file-button" title="导入备份">
+          <span aria-hidden="true">⇧</span>
+          <span>导入</span>
+          <input id="import-file" type="file" accept="application/json">
+        </label>
+      </div>
+    </aside>
+
+    <main class="main-view">
+      <section class="list-pane" aria-label="记录列表">
+        <div class="toolbar">
+          <div class="search-wrap">
+            <span aria-hidden="true">⌕</span>
+            <input id="search-input" type="search" placeholder="搜索牌阵、主题、标签、正文">
+          </div>
+          <button id="new-entry" class="primary-icon-button" type="button" title="新建记录">
+            <span aria-hidden="true">＋</span>
+            <span>新建</span>
+          </button>
+        </div>
+
+        <div id="entry-list" class="entry-list"></div>
+      </section>
+
+      <section class="editor-pane" aria-label="编辑记录">
+        <form id="entry-form" class="editor-form">
+          <div class="editor-head">
+            <div>
+              <label for="entry-title">标题</label>
+              <input id="entry-title" name="title" type="text" required maxlength="80">
+            </div>
+            <button id="delete-entry" class="danger-button" type="button" title="删除记录">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              类型
+              <select id="entry-type" name="type">
+                <option value="case">咨询案例</option>
+                <option value="note">学习笔记</option>
+              </select>
+            </label>
+            <label>
+              日期
+              <input id="entry-date" name="date" type="date">
+            </label>
+            <label id="case-category-field">
+              咨询分类
+              <select id="entry-case-category" name="caseCategory">
+                <option value="tarot">塔罗</option>
+                <option value="astrology">占星</option>
+                <option value="mixed">综合</option>
+              </select>
+            </label>
+            <label>
+              标签
+              <input id="entry-tags" name="tags" type="text" placeholder="关系, 事业, 韦特, 占星, 草药">
+            </label>
+            <label id="note-category-field">
+              笔记分类
+              <select id="entry-note-category" name="noteCategory">
+                <option value="astrology">占星</option>
+                <option value="herbal">草药</option>
+                <option value="ritual">仪式</option>
+                <option value="mixed">综合</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="case-fields" id="case-fields">
+            <label>
+              来访主题
+              <textarea id="entry-background" name="background" rows="4" placeholder="来访者带来的问题、背景、当下状态"></textarea>
+            </label>
+            <label>
+              牌阵与抽牌
+              <textarea id="entry-goal" name="goal" rows="4" placeholder="使用的牌阵、抽到的牌、正逆位"></textarea>
+            </label>
+          </div>
+
+          <section class="image-panel" id="image-panel" aria-label="案例图片">
+            <div class="image-panel-head">
+              <div>
+                <h2>牌面图片</h2>
+                <p>适合放牌阵、抽牌截图或复盘照片</p>
+              </div>
+              <label class="image-upload-button">
+                <span aria-hidden="true">＋</span>
+                <span>添加图片</span>
+                <input id="entry-images" type="file" accept="image/*" multiple>
+              </label>
+            </div>
+            <div id="image-grid" class="image-grid"></div>
+          </section>
+
+          <section class="ritual-panel" id="ritual-panel" aria-label="仪式资料">
+            <div class="ritual-panel-head">
+              <h2>仪式资料</h2>
+              <p>每个主题可以单独展开查看文字要点。</p>
+            </div>
+            <div id="ritual-list" class="ritual-list"></div>
+          </section>
+
+          <label>
+            正文
+            <textarea id="entry-body" name="body" rows="13" placeholder="记录咨询过程、课后整理、学习心得，或者后续复盘。这里不限制字数，可以写得很长。"></textarea>
+          </label>
+
+          <div class="editor-footer">
+            <p id="save-state">已保存</p>
+            <button class="save-button" type="submit">
+              <span aria-hidden="true">✓</span>
+              <span>保存</span>
+            </button>
+          </div>
+        </form>
+
+        <section id="lookup-panel" class="lookup-panel" aria-label="学习速查" hidden>
+          <div class="lookup-head">
+            <span id="lookup-category" class="badge"></span>
+            <h2 id="lookup-title"></h2>
+            <p id="lookup-summary"></p>
+          </div>
+          <div id="lookup-body" class="lookup-body"></div>
+          <div id="lookup-ritual-list" class="ritual-list"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <template id="empty-template">
+    <div class="empty-state">
+      <div class="empty-image" aria-hidden="true">
+        <div></div><div></div><div></div>
+      </div>
+      <h2>这里暂时是安静的</h2>
+      <p>换个筛选，或者新建一条记录。</p>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
 
       <nav class="type-tabs" aria-label="内容类型">
         <button class="tab is-active" data-filter="all" type="button">
