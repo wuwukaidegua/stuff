@@ -855,8 +855,11 @@ function createEntry() {
   selectedId = entry.id;
   persist();
   render();
-  els.title.focus();
-  els.title.select();
+  requestAnimationFrame(() => {
+    focusEditorOnMobile();
+    els.title.focus();
+    els.title.select();
+  });
 }
 
 function deleteSelected() {
@@ -899,6 +902,12 @@ function saveCurrent() {
 function selectEntry(id) {
   selectedId = id;
   render();
+  requestAnimationFrame(focusEditorOnMobile);
+}
+
+function focusEditorOnMobile() {
+  if (!window.matchMedia("(max-width: 720px)").matches) return;
+  document.querySelector(".editor-pane")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function render() {
@@ -983,7 +992,7 @@ function renderList() {
 
     const section = document.createElement("details");
     section.className = "entry-section note-category-section";
-    section.open = true;
+    section.open = !window.matchMedia("(max-width: 720px)").matches;
     section.innerHTML = `<summary class="entry-section-title">学习笔记 · ${noteCategoryLabel(category)}<span>${categoryEntries.length}</span></summary>`;
 
     categoryEntries.forEach((entry) => {
