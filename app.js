@@ -1181,6 +1181,7 @@ seedEntries.push(...builtInLearningEntries);
 
 let entries = loadEntries();
 let selectedId = entries[0]?.id ?? null;
+let editorDismissed = false;
 let typeFilter = "all";
 let tagFilter = "";
 
@@ -1218,6 +1219,7 @@ const els = {
 
 document.querySelector("#new-entry").addEventListener("click", createEntry);
 document.querySelector("#delete-entry").addEventListener("click", deleteSelected);
+document.querySelectorAll("[data-close-editor]").forEach((button) => button.addEventListener("click", closeEditor));
 document.querySelector("#export-btn").addEventListener("click", exportEntries);
 document.querySelector("#import-file").addEventListener("change", importEntries);
 els.imageInput.addEventListener("change", addImages);
@@ -1327,6 +1329,7 @@ function createEntry() {
   };
   entries.unshift(entry);
   selectedId = entry.id;
+  editorDismissed = false;
   persist();
   render();
   requestAnimationFrame(() => {
@@ -1375,8 +1378,15 @@ function saveCurrent() {
 
 function selectEntry(id) {
   selectedId = id;
+  editorDismissed = false;
   render();
   requestAnimationFrame(focusEditorOnMobile);
+}
+
+function closeEditor() {
+  editorDismissed = true;
+  renderEditor();
+  document.querySelector(".list-pane")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function focusEditorOnMobile() {
@@ -1530,6 +1540,12 @@ function createEntryCard(entry) {
 }
 
 function renderEditor() {
+  if (editorDismissed) {
+    els.form.hidden = true;
+    els.lookupPanel.hidden = true;
+    return;
+  }
+
   const selected = entries.find((entry) => entry.id === selectedId) ?? entries[0];
   if (!selected) {
     els.form.hidden = true;
